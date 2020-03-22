@@ -19,7 +19,7 @@ jobs:
     - name: docker & push
       uses: mr-smithers-excellent/docker-build-push@v2
       with:
-        image: registry.oassis.cn/${{ github.repository }}
+        image: ${{ github.repository }}
         tag: latest
         registry: https://registry.oassis.cn
         dockerfile: Dockerfile
