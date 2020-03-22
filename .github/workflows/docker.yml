@@ -1,0 +1,26 @@
+name: Docker
+# https://www.qikqiak.com/post/use-github-actions-build-go-app/
+# 推送代码到 master 分支或者创建 PR 的时候将触发 Build 的 workflow
+# 当创建了一个新的 tag 的时候，会触发 Release 的 workflow，该工作流会发布一个新的应用版本
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  hello_world_job:
+    name: A job to say hello
+    runs-on: ubuntu-latest
+    steps:
+    # To use this repository's private action, you must check out the repository
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Hello world action step
+      uses: james70s/docker-action@v1 # Uses an action in the root directory
+      id: hello
+      with:
+        who-to-greet: 'Mona the Octocat'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
