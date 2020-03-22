@@ -16,10 +16,11 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v1
       with:
-        go-version: 1.12
+        go-version: 1.13
+      id: go
   
     - name: Check out code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
   
     - name: Lint Go Code
       run: |
@@ -28,18 +29,42 @@ jobs:
         # make lint
         golint ./...
 
+    - name: Vet
+      run: go vet ./...
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Run Unit tests.
+        run: go test -cover ./...
+
+      - name: Upload Coverage report to CodeCov
+        uses: codecov/codecov-action@v1.0.0
+        with:
+          token: 69f39cae-d23c-4ec1-ae93-c955297f84b2  #${{secrets.CODECOV_TOKEN}}
+          file: ./coverage.txt
+
   build:
     name: Build
     runs-on: ubuntu-latest
+    needs: [lint, test]
     steps:
 
-    - name: Set up Go 1.13
+    - name: Set up Go
       uses: actions/setup-go@v1
       with:
         go-version: 1.13
-      id: go
 
-    - name: Check out code into the Go module directory
+    - name: Check out code
       uses: actions/checkout@v2
 
     - name: Get dependencies
@@ -49,12 +74,6 @@ jobs:
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
-
-    - name: Vet
-      run: go vet ./...
-
-    - name: Test
-      run: go test -cover ./...
 
     - name: Build
       run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
