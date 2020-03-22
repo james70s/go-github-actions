@@ -13,6 +13,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
 
+      - name: Info
+        run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
+
+      # https://goreleaser.com/
       - name: Validates GO releaser config
         uses: docker://goreleaser/goreleaser:latest
         with:
