@@ -47,11 +47,11 @@ jobs:
       - name: Run Unit tests.
         run: go test -cover ./...
 
-      - name: Upload Coverage report to CodeCov
-        uses: codecov/codecov-action@v1.0.0
-        with:
-          token: 69f39cae-d23c-4ec1-ae93-c955297f84b2  #${{secrets.CODECOV_TOKEN}}
-          file: ./coverage.txt
+      # - name: Upload Coverage report to CodeCov
+      #   uses: codecov/codecov-action@v1.0.0
+      #   with:
+      #     token: 69f39cae-d23c-4ec1-ae93-c955297f84b2  #${{secrets.CODECOV_TOKEN}}
+      #     file: ./coverage.txt
 
   build:
     name: Build
