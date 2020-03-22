@@ -17,7 +17,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Hello world action step
-      uses: james70s/docker-action@v1 # Uses an action in the root directory
+      uses: actions/hello-world-docker-action@v1 # Uses an action in the root directory
+      # uses: james70s/docker-action@v1 # Uses an action in the root directory
       # id: hello
       with:
         who-to-greet: 'Mona the Octocat'
