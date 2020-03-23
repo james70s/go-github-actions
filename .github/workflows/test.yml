@@ -1,4 +1,4 @@
-name: Build & Test
+name: Test
 # https://www.qikqiak.com/post/use-github-actions-build-go-app/
 # 推送代码到 master 分支或者创建 PR 的时候将触发 Build 的 workflow
 # 当创建了一个新的 tag 的时候，会触发 Release 的 workflow，该工作流会发布一个新的应用版本

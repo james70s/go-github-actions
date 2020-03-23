@@ -10,28 +10,34 @@ jobs:
     name: Release on GitHub
     runs-on: ubuntu-latest
     steps:
-    - name: Check out code
+    - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Info
-      run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
+    # - name: Info
+    #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
 
-    # https://goreleaser.com/
-    - name: Validates GO releaser config
-      uses: docker://goreleaser/goreleaser:latest
+    # # https://goreleaser.com/
+    # - name: Validates GO releaser config
+    #   uses: docker://goreleaser/goreleaser:latest
+    #   with:
+    #     args: check
+
+    # - name: Create release on GitHub
+    #   uses: docker://goreleaser/goreleaser:latest
+    #   with:
+    #     args: release
+    #   env:
+    #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Build docker & push
+      uses: mr-smithers-excellent/docker-build-push@v2
       with:
-        args: check
-
-    - name: Create release on GitHub
-      uses: docker://goreleaser/goreleaser:latest
-      with:
-        args: release
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-
-          # repo: registry.oassis.cn/eb/server
-          # registry: https://registry.oassis.cn
-          # build_args:
-          #   - build=http://yourproxy.com
-          #   - version=1.2.3
+        image: ${{ github.repository }}
+        # tag: latest
+        registry: registry.limei.net.cn
+        dockerfile: Dockerfile
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+  
+  
+  
