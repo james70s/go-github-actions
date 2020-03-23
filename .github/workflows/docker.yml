@@ -21,7 +21,8 @@ jobs:
       with:
         image: ${{ github.repository }}
         tag: latest
-        registry: registry.oassis.cn
+        # registry: registry.oassis.cn
+        registry: registry.limei.net.cn
         dockerfile: Dockerfile
 
   # hello_world_job:
