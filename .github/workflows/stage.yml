@@ -1,0 +1,30 @@
+# 标记t*标签，作为内部测试用
+name: Release
+on:
+  create:
+    tags:
+    - t*
+
+jobs:
+  release:
+    name: Release on GitHub
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    # - name: Info
+    #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
+
+    - name: Build docker & push
+      uses: mr-smithers-excellent/docker-build-push@v2
+      with:
+        image: ${{ github.repository }}
+        # tag: latest
+        registry: registry.limei.net.cn
+        dockerfile: Dockerfile
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+  
+  
+  

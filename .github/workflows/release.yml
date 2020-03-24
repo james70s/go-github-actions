@@ -6,7 +6,7 @@ on:
     - v*
 
 jobs:
-  release:
+  docker:
     name: Release on GitHub
     runs-on: ubuntu-latest
     steps:
@@ -40,4 +40,18 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
   
   
-  
+  deploy:
+    name: Deploy to Host
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SUN_HOST }}
+        username: ${{ secrets.SUN_HOST_USERNAME }}
+        password: ${{ secrets.SUN_HOST_PASSWORD }}
+        port: ${{ secrets.SUN_HOST_PORT }}
+        # script: whoami
+        script: |
+          mkdir abc/def
+          ls -al
