@@ -36,8 +36,8 @@ jobs:
         # tag: latest
         registry: registry.limei.net.cn
         dockerfile: Dockerfile
-        # username: ${{ secrets.REGISTRY_USERNAME }}
-        # password: ${{ secrets.REGISTRY_PASSWORD }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
   
 
   
@@ -50,9 +50,9 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SUN_HOST }}
-        key: ${{ secrets.SUN_DEPLOY_KEY }}
-        # username: ${{ secrets.SUN_HOST_USERNAME }}
-        # password: ${{ secrets.SUN_HOST_PASSWORD }}
+        # key: ${{ secrets.SUN_DEPLOY_KEY }}
+        username: ${{ secrets.SUN_HOST_USERNAME }}
+        password: ${{ secrets.SUN_HOST_PASSWORD }}
         port: ${{ secrets.SUN_HOST_PORT }}
         # script: whoami
         script: |
