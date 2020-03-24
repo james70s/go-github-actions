@@ -1,9 +1,11 @@
 # 标记t*标签，作为内部测试用
-name: Release
+name: Stage
 on:
-  create:
+  push:
+    branches:
+      - dev
     tags:
-    - t*
+      - t*
 
 jobs:
   release:

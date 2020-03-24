@@ -39,7 +39,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
   
-        
+
   
   deploy:
     name: Deploy to Host
@@ -50,8 +50,9 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SUN_HOST }}
-        username: ${{ secrets.SUN_HOST_USERNAME }}
-        password: ${{ secrets.SUN_HOST_PASSWORD }}
+        key: ${{ secrets.SUN_DEPLOY_KEY }}
+        # username: ${{ secrets.SUN_HOST_USERNAME }}
+        # password: ${{ secrets.SUN_HOST_PASSWORD }}
         port: ${{ secrets.SUN_HOST_PORT }}
         # script: whoami
         script: |
