@@ -44,7 +44,7 @@ jobs:
   deploy:
     name: Deploy to Host
     runs-on: ubuntu-latest
-    needs: [docker]
+    # needs: [docker]
     steps:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -58,3 +58,5 @@ jobs:
         script: |
           mkdir abc
           ls -al
+
+
