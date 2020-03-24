@@ -40,7 +40,6 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
   
 
-  
   deploy:
     name: Deploy to Host
     runs-on: ubuntu-latest
