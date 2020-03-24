@@ -36,8 +36,8 @@ jobs:
         # tag: latest
         registry: registry.limei.net.cn
         dockerfile: Dockerfile
-        username: admin  # ${{ secrets.REGISTRY_USERNAME }}
-        password: Ruby4Rails #${{ secrets.REGISTRY_PASSWORD }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
   
 
   
