@@ -32,10 +32,10 @@ jobs:
     - name: Build docker & push
       uses: mr-smithers-excellent/docker-build-push@v2
       with:
-        image: ${{ github.repository }}
         # tag: latest
+        # dockerfile: Dockerfile
+        image: ${{ github.repository }}
         registry: registry.limei.net.cn
-        dockerfile: Dockerfile
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
   
