@@ -62,7 +62,7 @@ jobs:
         username: ${{ secrets.SUN_HOST_USERNAME }}
         password: ${{ secrets.SUN_HOST_PASSWORD }}
         port: ${{ secrets.SUN_HOST_PORT }}
-        source: "sun"
+        source: "sun/readme.md"
         target: "sunn"
 
     - name: SSH after
