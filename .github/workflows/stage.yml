@@ -40,7 +40,7 @@ jobs:
         fetch-depth: 1
         token: ${{ secrets.GITHUB_PAT }} # `GitHub_PAT` is a secret that contains your PAT
         path: sun
-        
+
     - name: Info
       run: cd sun
     # - name: SSH bofore
@@ -97,7 +97,7 @@ jobs:
     
         # then uploads these 2 files
         scp: |
-          * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/sun
+          * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/
     
         # then run these commands
         ssh_after: |
