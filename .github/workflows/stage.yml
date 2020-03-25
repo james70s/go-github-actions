@@ -41,8 +41,6 @@ jobs:
         token: ${{ secrets.GITHUB_PAT }} # `GitHub_PAT` is a secret that contains your PAT
         path: sun
 
-    - name: Info
-      run: cd sun
     # - name: SSH bofore
     #   uses: appleboy/ssh-action@master
     #   with:
