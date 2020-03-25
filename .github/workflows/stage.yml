@@ -88,7 +88,7 @@ jobs:
         port: ${{ secrets.SUN_HOST_PORT }}
         # runs this on remove server
         ssh_before: |
-          rm -rf sample1.dat sample2.dat
+          rm -rf sun
           echo $HELLO
           echo $MESSAGE
           ls -lath
