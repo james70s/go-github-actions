@@ -32,17 +32,17 @@ jobs:
     runs-on: ubuntu-latest
     # needs: [docker]
     steps:
-    - name: Checkout
+    # https://github.com/actions/checkout
+    - name: Checkout deploy script
       uses: actions/checkout@v2
       with:
         repository: james70s/deploy-sun
+        fetch-depth: 0
         token: ${{ secrets.GITHUB_PAT }} # `GitHub_PAT` is a secret that contains your PAT
         path: sun
+    - run: ls sun
 
-    - name: Info
-      run: |
-        ls sun
-
+    # https://github.com/marketplace/actions/ssh-and-scp-setup
     - name: SSH
       uses: alinz/ssh-scp-action@master
       env:
