@@ -91,7 +91,6 @@ jobs:
           rm -rf sun
           echo $HELLO
           echo $MESSAGE
-          ls -lath
     
         # then uploads these 2 files
         scp: |
@@ -101,7 +100,6 @@ jobs:
         ssh_after: |
           echo $HELLO
           echo $MESSAGE
-          ls -lath
 
 
   # deploy:
