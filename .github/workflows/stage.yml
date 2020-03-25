@@ -37,7 +37,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: james70s/deploy-sun
-        fetch-depth: 0
+        fetch-depth: 1
         token: ${{ secrets.GITHUB_PAT }} # `GitHub_PAT` is a secret that contains your PAT
         path: sun
 
@@ -94,7 +94,7 @@ jobs:
     
         # then uploads these 2 files
         scp: |
-          sun ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/sun -r
+          sun ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/sun
     
         # then run these commands
         ssh_after: |
