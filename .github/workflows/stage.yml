@@ -97,7 +97,7 @@ jobs:
     
         # then uploads these 2 files
         scp: |
-          * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/
+          sun/* ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/
     
         # then run these commands
         ssh_after: |
