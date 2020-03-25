@@ -58,9 +58,9 @@ jobs:
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.SUN_HOST }}
-        key: ${{ secrets.SUN_DEPLOY_KEY }}
+        # key: ${{ secrets.SUN_DEPLOY_KEY }}
         username: ${{ secrets.SUN_HOST_USERNAME }}
-        # password: ${{ secrets.SUN_HOST_PASSWORD }}
+        password: ${{ secrets.SUN_HOST_PASSWORD }}
         port: ${{ secrets.SUN_HOST_PORT }}
         source: "sun"
         target: "sunn"
