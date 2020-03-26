@@ -15,18 +15,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-  #   # - name: Info
-  #   #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
+    # - name: Info
+    #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
 
-    # - name: Build docker & push
-    #   uses: whoan/docker-build-with-cache-action@v4
-    #   with:
-    #     image_name: ${{ github.repository }}
-    #     image_tag: latest, 0.1.1
-    #     push_git_tag: true
-    #     registry: registry.limei.net.cn
-    #     username: ${{ secrets.REGISTRY_USERNAME }}
-    #     password: ${{ secrets.REGISTRY_PASSWORD }}
+    # https://github.com/marketplace/actions/build-and-push-docker-images
+    - name: Build docker & push
+      uses: docker/build-push-action@v1
+      with:
+        repository: ${{ github.repository }}
+        registry: registry.limei.net.cn
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+        tags: latest,${{ github.event.ref }}
+        # tag_with_ref: true
 
   deploy:
     name: Deploy to sun
