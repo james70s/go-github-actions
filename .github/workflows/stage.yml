@@ -57,10 +57,10 @@ jobs:
         # runs this on remove server
         ssh_before: |
           make load
-        # docker-compose down
           rm -rf $WORKPATH
           mkdir $WORKPATH
-    
+
+        # docker-compose down
         # copy file
         scp: |
           * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/$WORKPATH
