@@ -4,29 +4,89 @@ on:
   push:
     branches:
       - dev
-    tags:
-      - t*
+    # tags:
+    #   - t*
 
 jobs:
-  release:
-    name: Release on GitHub
+  # release:
+  #   name: Release on GitHub
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v1
+
+  #   # - name: Info
+  #   #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
+
+  #   - name: Build docker & push
+  #     uses: mr-smithers-excellent/docker-build-push@v2
+  #     with:
+  #       image: ${{ github.repository }}
+  #       # tag: latest
+  #       registry: registry.limei.net.cn
+  #       dockerfile: Dockerfile
+  #       username: ${{ secrets.REGISTRY_USERNAME }}
+  #       password: ${{ secrets.REGISTRY_PASSWORD }}
+  deploy:
+    name: Deploy to sun
     runs-on: ubuntu-latest
+    # needs: [docker]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-
-    # - name: Info
-    #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
-
-    - name: Build docker & push
-      uses: mr-smithers-excellent/docker-build-push@v2
+    # https://github.com/actions/checkout
+    - name: Checkout deploy script
+      uses: actions/checkout@v2
       with:
-        image: ${{ github.repository }}
-        # tag: latest
-        registry: registry.limei.net.cn
-        dockerfile: Dockerfile
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-  
-  
-  
+        repository: james70s/deploy-sun
+        fetch-depth: 1
+        token: ${{ secrets.GITHUB_PAT }} # `GitHub_PAT` is a secret that contains your PAT
+        # path: sun
+
+    # # https://github.com/marketplace/actions/ssh-and-scp-setup
+    - name: SSH
+      uses: alinz/ssh-scp-action@master
+      env:
+        # 服务器上的工作目录
+        WORKPATH: sun
+        REGISTRY: registry.limei.net.cn
+        IMAGE: 
+      with:
+        key: ${{ secrets.SUN_DEPLOY_KEY }}
+        host: ${{ secrets.SUN_HOST }}
+        user:  ${{ secrets.SUN_HOST_USERNAME }}
+        port: ${{ secrets.SUN_HOST_PORT }}
+        # runs this on remove server
+        ssh_before: |
+          cd $WORKPATH
+          make load
+          cd ..
+          rm -rf $WORKPATH
+          mkdir $WORKPATH
+
+        # docker-compose down
+        # copy file
+        scp: |
+          * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/$WORKPATH
+
+        # then run these commands
+        ssh_after: |
+          echo $WORKPATH
+
+
+  # deploy:
+  #   name: Deploy to Host
+  #   runs-on: ubuntu-latest
+  #   # needs: [docker]
+  #   steps:
+  #   - name: Login to host and deploy
+  #     uses: appleboy/ssh-action@master
+  #     with:
+  #       host: ${{ secrets.SUN_HOST }}
+  #       key: ${{ secrets.SUN_DEPLOY_KEY }}
+  #       username: ${{ secrets.SUN_HOST_USERNAME }}
+  #       # password: ${{ secrets.SUN_HOST_PASSWORD }}
+  #       port: ${{ secrets.SUN_HOST_PORT }}
+  #       # script: whoami
+  #       script: |
+  #         cd sun
+  #         git pull
+  #         ls -al
