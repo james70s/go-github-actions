@@ -90,8 +90,7 @@ jobs:
     - name: SSH
       uses: alinz/ssh-scp-action@master
       env:
-        HELLO: cool
-        MESSAGE: hello world
+        PATH: sun
       with:
         key: ${{ secrets.SUN_DEPLOY_KEY }}
         host: ${{ secrets.SUN_HOST }}
@@ -99,20 +98,19 @@ jobs:
         port: ${{ secrets.SUN_HOST_PORT }}
         # runs this on remove server
         ssh_before: |
-          rm -rf sun
-          mkdir sun
-          echo $HELLO
+          rm -rf $PATH
+          mkdir $PATH
           echo $MESSAGE
     
         # then uploads these 2 files
         scp: |
-          * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/sun
+          * ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/$PATH
         # sun.zip ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/
 
         # then run these commands
         ssh_after: |
-          echo $HELLO
-          echo $MESSAGE
+          echo $PATH
+        # echo $MESSAGE
 
 
   # deploy:
