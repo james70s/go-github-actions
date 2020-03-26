@@ -56,7 +56,9 @@ jobs:
         port: ${{ secrets.SUN_HOST_PORT }}
         # runs this on remove server
         ssh_before: |
+          cd $WORKPATH
           make load
+          cd ..
           rm -rf $WORKPATH
           mkdir $WORKPATH
 
