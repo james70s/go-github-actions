@@ -41,12 +41,12 @@ jobs:
         token: ${{ secrets.GITHUB_PAT }} # `GitHub_PAT` is a secret that contains your PAT
         path: sun
 
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: 'sun.zip'
-        path: 'sun'
-        exclusions: '*.git*'
+    # - name: Archive Release
+    #   uses: thedoctor0/zip-release@master
+    #   with:
+    #     filename: 'sun.zip'
+    #     path: 'sun'
+    #     exclusions: '*.git*'
 
     # - name: Info
     #   run: ｜
@@ -106,9 +106,9 @@ jobs:
     
         # then uploads these 2 files
         scp: |
-          sun.zip ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/
-        # sun/* ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/sun
-    
+          sun/* ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/sun
+        # sun.zip ${{ secrets.SUN_HOST_USERNAME }}@${{ secrets.SUN_HOST }}:~/
+
         # then run these commands
         ssh_after: |
           echo $HELLO
