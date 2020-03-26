@@ -98,8 +98,8 @@ jobs:
         port: ${{ secrets.SUN_HOST_PORT }}
         # runs this on remove server
         ssh_before: |
-          rm -rf `$PATH`
-          mkdir `$PATH`
+          rm -rf ${{ $PATH }}
+          mkdir ${{ $PATH }}
           echo $MESSAGE
     
         # then uploads these 2 files
