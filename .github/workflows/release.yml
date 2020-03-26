@@ -38,7 +38,13 @@ jobs:
     #     registry: registry.limei.net.cn
     #     username: ${{ secrets.REGISTRY_USERNAME }}
     #     password: ${{ secrets.REGISTRY_PASSWORD }}
-  
+    
+    # https://help.github.com/cn/actions/reference/context-and-expression-syntax-for-github-actions
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
     # https://github.com/marketplace/actions/build-and-push-docker-images
     - name: Build docker & push
       uses: docker/build-push-action@v1
