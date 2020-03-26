@@ -45,8 +45,8 @@ jobs:
         # tag: latest
         # dockerfile: Dockerfile
         name: registry.limei.net.cn/${{ github.repository }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+        # username: ${{ secrets.REGISTRY_USERNAME }}
+        # password: ${{ secrets.REGISTRY_PASSWORD }}
 
   # deploy:
   #   name: Deploy to Host
