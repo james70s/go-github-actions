@@ -43,7 +43,11 @@ jobs:
     - name: Dump GitHub context
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
+        TAG: ${{ github.event.ref }}
+      run: |
+        echo "$GITHUB_CONTEXT"
+        echo ${{ github.event.ref }}
+        echo $TAG
 
     # https://github.com/marketplace/actions/build-and-push-docker-images
     - name: Build docker & push
