@@ -8,25 +8,26 @@ on:
     #   - t*
 
 jobs:
-  # release:
-  #   name: Release on GitHub
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v1
+  release:
+    name: Release on GitHub
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
 
   #   # - name: Info
   #   #   run: echo docker.pkg.github.com/${{ github.repository }}:${IMAGE_TAG}
 
-  #   - name: Build docker & push
-  #     uses: mr-smithers-excellent/docker-build-push@v2
-  #     with:
-  #       image: ${{ github.repository }}
-  #       # tag: latest
-  #       registry: registry.limei.net.cn
-  #       dockerfile: Dockerfile
-  #       username: ${{ secrets.REGISTRY_USERNAME }}
-  #       password: ${{ secrets.REGISTRY_PASSWORD }}
+    # - name: Build docker & push
+    #   uses: whoan/docker-build-with-cache-action@v4
+    #   with:
+    #     image_name: ${{ github.repository }}
+    #     image_tag: latest, 0.1.1
+    #     push_git_tag: true
+    #     registry: registry.limei.net.cn
+    #     username: ${{ secrets.REGISTRY_USERNAME }}
+    #     password: ${{ secrets.REGISTRY_PASSWORD }}
+
   deploy:
     name: Deploy to sun
     runs-on: ubuntu-latest
